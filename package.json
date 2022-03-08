@@ -4,8 +4,7 @@
   "description": "The best way to watch videos!",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon -L --exec babel-node index.js",
+    "dev": "nodemon -L --exec babel-node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
