@@ -7,6 +7,8 @@ import videoRouter from "./routers/videoRouter";
 const PORT = 4000;
 const app = express();
 
+app.set("view engine", "pug");
+
 const logger = morgan("dev"); //Middleware for log
 app.use(logger);
 
