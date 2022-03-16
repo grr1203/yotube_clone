@@ -1,7 +1,12 @@
-doctype html
-html(lang="ko")
-    head
-        title Youtube Clone
-    body
-        h1 Welcome to Youtube Clone
-        footer &copy; 2022 Youtube Clone
+extends base.pug
+include mixins/video
+
+block content
+    h2 Welcome here you will see the trending videos
+    each video in videos
+        +video(video)
+    else 
+        li Sorry nothing found.
+        
+    input(placeholder="Whats your name?")
+    button send
