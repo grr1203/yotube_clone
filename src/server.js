@@ -1,4 +1,6 @@
 import express from "express"; //no babel: const express = require("express");
+import "./db";
+import "./models/Video";
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
