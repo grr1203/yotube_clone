@@ -1,6 +1,6 @@
 import express from "express"; //no babel: const express = require("express");
 import morgan from "morgan";
-import globalRouter from "./routers/globalRouter";
+import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
@@ -14,7 +14,7 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true })); //for using req.body
 
 //Router
-app.use("/", globalRouter);
+app.use("/", rootRouter);
 app.use("/user", userRouter);
 app.use("/video", videoRouter);
 
