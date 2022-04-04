@@ -1,6 +1,7 @@
 import express from "express"; //no babel: const express = require("express");
 import morgan from "morgan";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middleware";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
@@ -14,7 +15,16 @@ app.set("views", process.cwd() + "/src/views");
 const logger = morgan("dev"); //Middleware for log
 app.use(logger);
 app.use(express.urlencoded({ extended: true })); //for using req.body
-app.use(session({ secret: "Hello", resave: true, saveUninitialized: true }));
+app.use(
+  session({
+    store: MongoStore.create({
+      mongoUrl: "mongodb://127.0.0.1:27017/youtubeClone",
+    }),
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false, //data in session first change(login) -> session save
+  })
+);
 app.use(localsMiddleware);
 
 //Router

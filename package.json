@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -L --exec babel-node src/init.js",
+    "dbstart": "sudo mongod --dbpath ~/DB/MongoDB",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +20,8 @@
   "homepage": "https://github.com/grr1203/yotube_clone#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "connect-mongo": "^4.6.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "mongoose": "^6.2.7",
