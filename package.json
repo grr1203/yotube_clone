@@ -4,9 +4,10 @@
   "description": "The best way to watch videos!",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -L --exec babel-node src/init.js",
+    "dev": "nodemon -L",
     "dbstart": "sudo mongod --dbpath ~/DB/MongoDB",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "assets": "webpack"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,14 @@
     "@babel/core": "^7.17.5",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
-    "nodemon": "^2.0.15"
+    "babel-loader": "^8.2.4",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.0",
+    "nodemon": "^2.0.15",
+    "sass": "^1.50.0",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
   }
 }
