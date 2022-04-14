@@ -8,6 +8,6 @@ mixin video(video)
             each hashtag in video.hashtags
                 li=hashtag
         ul 
-            li #{video.rating}/5
-            li #{video.views} view
+            li #{video.meta.rating}/5
+            li #{video.meta.views} view
         hr
