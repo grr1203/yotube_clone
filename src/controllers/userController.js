@@ -9,16 +9,12 @@ export const postJoin = async (req, res) => {
   const exists = await User.exists({ $or: [{ username }, { email }] });
 
   if (exists) {
-    return res.status(400).render("join", {
-      pageTitle: "Join",
-      errorMessage: "This username/email is already taken.",
-    });
+    req.flash("error", "This username/email is already taken.");
+    return res.status(400).redirect("join");
   }
   if (password !== password2) {
-    return res.status(400).render("join", {
-      pageTitle: "Join",
-      errorMessage: "Password confirmation does not match.",
-    });
+    req.flash("error", "Password confirmation does not match.");
+    return res.status(400).redirect("join");
   }
 
   try {
@@ -31,10 +27,8 @@ export const postJoin = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(400).render("join", {
-      pageTitle: "Join",
-      errorMessage: "Password confirmation does not match.",
-    });
+    req.flash("error", "Password confirmation does not match.");
+    return res.status(400).redirect("join");
   }
 
   return res.redirect("/login");
@@ -47,18 +41,14 @@ export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username, socialOnly: false });
   if (!user) {
-    return res.status(400).render("login", {
-      pageTitle: "Login",
-      errorMessage: "An account with this username does not exists.",
-    });
+    req.flash("error", "An account with this username does not exists.");
+    return res.status(400).redirect("login");
   }
 
   const ok = await bcrypt.compare(password, user.password);
   if (!ok) {
-    return res.status(400).render("login", {
-      pageTitle: "Login",
-      errorMessage: "Wrong password.",
-    });
+    req.flash("error", "Wrong password.");
+    return res.status(400).redirect("login");
   }
 
   req.session.loggedIn = true;
@@ -115,6 +105,7 @@ export const finishGithubLogin = async (req, res) => {
       (email) => email.primary === true && email.verified === true
     );
     if (!emailObj) {
+      req.flash("error", "Can't found email.");
       return res.redirect("/login");
     }
 
@@ -140,6 +131,7 @@ export const finishGithubLogin = async (req, res) => {
 
 export const logout = (req, res) => {
   req.session.destroy();
+  req.flash("info", "Bye");
   return res.redirect("/");
 };
 
@@ -163,6 +155,7 @@ export const postEdit = async (req, res) => {
     const existUsername = await User.exists({ username });
     const existEmail = await User.exists({ email });
     if (existUsername || existEmail) {
+      req.flash("error", "Can't find User.");
       return res.status(400).redirect("/user/edit");
     }
   }
@@ -185,6 +178,10 @@ export const postEdit = async (req, res) => {
 };
 
 export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    req.flash("error", "Can't change password.");
+    return res.redirect("/");
+  }
   return res.render("user/change-password", { pageTitle: "Change Password" });
 };
 
@@ -198,17 +195,13 @@ export const postChangePassword = async (req, res) => {
 
   const ok = await bcrypt.compare(oldPassword, password);
   if (!ok) {
-    return res.status(400).render("user/change-password", {
-      pageTitle: "Change Password",
-      errorMessage: "The current password is incorrect.",
-    });
+    req.flash("error", "The current password is incorrect.");
+    return res.status(400).redirect("change-password");
   }
 
   if (newPassword !== newPasswordConfirmation) {
-    return res.status(400).render("user/change-password", {
-      pageTitle: "Change Password",
-      errorMessage: "Password confirmation does not match.",
-    });
+    req.flash("error", "Password confirmation does not match.");
+    return res.status(400).redirect("change-password");
   }
 
   const user = await User.findById(_id);
@@ -216,6 +209,7 @@ export const postChangePassword = async (req, res) => {
   await user.save();
   req.session.user.password = user.password;
 
+  req.flash("info", "Password updated");
   return res.redirect("/user/logout");
 };
 
