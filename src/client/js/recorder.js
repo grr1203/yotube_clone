@@ -6,6 +6,7 @@ const video = document.getElementById("preview");
 let stream;
 let recorder;
 let videoFile;
+let stopTimeout;
 
 const files = {
   input: "recording.webm",
@@ -16,7 +17,7 @@ const files = {
 const init = async () => {
   stream = await navigator.mediaDevices.getUserMedia({
     audio: false,
-    video: true,
+    video: { width: 1024, height: 768 },
   });
   video.srcObject = stream;
   video.play();
@@ -37,9 +38,16 @@ const handleStart = () => {
   };
 
   recorder.start();
+  stopTimeout = setTimeout(() => {
+    handleStop();
+  }, 5000);
 };
 
 const handleStop = () => {
+  if (stopTimeout) {
+    clearTimeout(stopTimeout);
+    stopTimeout = null;
+  }
   actionBtn.innerText = "Download recording";
   actionBtn.removeEventListener("click", handleStop);
   actionBtn.addEventListener("click", handleDownload);

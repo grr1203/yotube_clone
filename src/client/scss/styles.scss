@@ -2,7 +2,6 @@
 @import "./config/reset.scss";
 
 //Components
-
 @import "./components/header.scss";
 @import "./components/footer.scss";
 @import "./components/video.scss";
@@ -11,11 +10,11 @@
 @import "./components/forms.scss";
 
 //Screens
-
 @import "./screens/home.scss";
 @import "./screens/search.scss";
 @import "./screens/profile.scss";
 @import "./screens/edit-profile.scss";
+@import "./screens/upload.scss";
 
 //Defaults
 

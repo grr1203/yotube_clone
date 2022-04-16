@@ -16,7 +16,7 @@ label {
   display: block;
 }
 
-input {
+input:not(input[type="range"]) {
   all: unset;
   padding: 15px 20px;
   border-radius: 5px;
@@ -35,8 +35,16 @@ input[type="submit"],
   border-radius: 5px;
   padding: 12px 20px;
   background-color: $red;
-  color: rgba($color: whitesmoke, $alpha: 1);
-  text-align: center;
+  color: rgba($color: whitesmoke, $alpha: 1) !important;
+  text-align: center !important;
   cursor: pointer;
   display: block;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
