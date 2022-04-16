@@ -1,0 +1,20 @@
+.video {
+  .video__thumb {
+    height: 140px;
+    border-radius: 7px;
+    width: 100%;
+    background-color: ivory;
+  }
+
+  .video__data {
+    padding: 10px;
+    .video__title {
+      font-size: 18px;
+      display: block;
+    }
+    .video__meta {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  }
+}
