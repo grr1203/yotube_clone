@@ -16,7 +16,7 @@ label {
   display: block;
 }
 
-input:not(input[type="range"]) {
+input {
   all: unset;
   padding: 15px 20px;
   border-radius: 5px;

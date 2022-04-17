@@ -15,8 +15,6 @@ block content
                 input(type="range", step="1", value="0", min="0")#timeline
             div 
                 button#fullScreen Enter Full Screen
-    
-
 
     div
         p=video.description
@@ -29,5 +27,20 @@ block content
         br
         a(href=`${video.id}/delete`) Delete Video &rarr;
 
+    if loggedIn
+        div.video__add-comments
+            form.video__comments-form#commentForm
+                textarea(cols="50", rows="5", placeholder="Write a nice comment..")
+                button.social__btn Add comment
+    div.video__comments
+        ul 
+            each comment in video.comments.reverse()
+                li.video__comment(data-id=comment.id)
+                    i.fas.fa-comment 
+                    span #{comment.text}
+                    if loggedInUser._id === String(comment.owner)
+                        span#deleteBtn ❌
+
 block scripts
     script(src="/static/js/videoPlayer.js")
+    script(src="/static/js/commentSection.js")

@@ -1,0 +1,34 @@
+.video__add-comments {
+  .video__comments-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button {
+    margin-left: 20px;
+  }
+}
+
+.video__comments {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+
+  .video__comment {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10000px;
+    background-color: whitesmoke;
+    color: black;
+    margin-bottom: 10px;
+
+    span:nth-child(2) {
+      width: 80%;
+    }
+  }
+}

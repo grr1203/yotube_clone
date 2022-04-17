@@ -17,6 +17,7 @@ app.set("views", process.cwd() + "/src/views");
 const logger = morgan("dev"); //Middleware for log
 app.use(logger);
 app.use(express.urlencoded({ extended: true })); //for using req.body
+app.use(express.json());
 app.use(
   session({
     store: MongoStore.create({
