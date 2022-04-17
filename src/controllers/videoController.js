@@ -64,7 +64,7 @@ export const getEdit = async (req, res) => {
   const video = await Video.findById(id);
   if (!video)
     return res.status(404).render("404", { pageTitle: "Video not found." });
-  if (video.owner !== String(req.session.user._id)) {
+  if (String(video.owner) !== req.session.user._id) {
     req.flash("error", "Not authorized");
     return res.status(403).redirect("/");
   }
@@ -75,9 +75,9 @@ export const getEdit = async (req, res) => {
 export const postEdit = async (req, res) => {
   const { id } = req.params;
   const { title, description, hashtags } = req.body;
-  const video = await Video.exists({ _id: id });
+  const video = await Video.findById({ _id: id });
   if (!video) return res.render("404", { pageTitle: "Video not found." });
-  if (video.owner !== String(req.session.user._id)) {
+  if (String(video.owner) !== req.session.user._id) {
     req.flash("error", "You are not the owner of the video.");
     return res.status(403).redirect("/");
   }
@@ -96,7 +96,7 @@ export const deleteVideo = async (req, res) => {
   const video = await Video.findById(id);
   if (!video)
     return res.status(404).render("404", { pageTitle: "Video not found." });
-  if (video.owner !== String(req.session.user._id)) {
+  if (String(video.owner) !== req.session.user._id) {
     req.flash("error", "You are not the owner of the video.");
     return res.status(403).redirect("/");
   }
