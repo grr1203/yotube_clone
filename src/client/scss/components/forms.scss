@@ -16,7 +16,7 @@ label {
   display: block;
 }
 
-input {
+input:not(input[type="range"], input[type="submit"]) {
   all: unset;
   padding: 15px 20px;
   border-radius: 5px;
@@ -32,9 +32,14 @@ input {
 
 input[type="submit"],
 .social__btn {
+  all: unset;
+  margin-top: 10px;
+  width: 90%;
   border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 12px 20px;
   background-color: $red;
+  font-size: 16px;
   color: rgba($color: whitesmoke, $alpha: 1) !important;
   text-align: center !important;
   cursor: pointer;

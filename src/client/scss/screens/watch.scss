@@ -1,3 +1,37 @@
+.video__detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15%;
+  margin: 10px 0 30px 0;
+  color: whitesmoke;
+
+  a {
+    color: skyblue;
+  }
+
+  .video__detail__data {
+    display: flex;
+    flex-direction: column;
+    .video__data__title {
+      padding: 5px 0 15px 0;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    small {
+      padding: 5px;
+      font-size: 14px;
+    }
+  }
+
+  .video__data__update {
+    a {
+      display: block;
+      padding: 5px;
+    }
+  }
+}
+
 .video__add-comments {
   .video__comments-form {
     display: flex;
@@ -6,6 +40,8 @@
   }
 
   button {
+    width: 15%;
+    font-size: 14px;
     margin-left: 20px;
   }
 }
