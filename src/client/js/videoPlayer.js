@@ -52,7 +52,7 @@ const handleVolumeChange = (event) => {
   video.volume = value;
 };
 
-const handleLoadedMetadata = () => {
+const handleLoadeddata = () => {
   totalTime.innerText = formatTime(Math.floor(video.duration));
   timeline.max = Math.floor(video.duration);
 };
@@ -114,7 +114,7 @@ const handleKeyDown = (event) => {
 play.addEventListener("click", handlePlayClick);
 mute.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
-video.addEventListener("loadedmetadata", handleLoadedMetadata);
+video.addEventListener("loadeddata", handleLoadeddata);
 video.addEventListener("timeupdate", handleTimeUpdate);
 video.addEventListener("click", handlePlayClick);
 video.addEventListener("ended", handleEnded);
@@ -122,3 +122,5 @@ videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("keydown", handleKeyDown);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
+
+handleLoadeddata();
