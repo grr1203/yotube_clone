@@ -103,6 +103,7 @@ const handleEnded = () => {
 };
 
 const handleKeyDown = (event) => {
+  event.preventDefault();
   if (event.key === " ") {
     handlePlayClick();
   } else if (event.key === "f" || event.key === "F") {

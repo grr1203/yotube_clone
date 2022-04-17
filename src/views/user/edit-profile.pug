@@ -2,7 +2,7 @@ extends ../base
 
 block content 
     div.profile__data 
-        img(src="/" + loggedInUser.avatarUrl).avatar
+        img(src=(isHeroku ? "" : "/") + loggedInUser.avatarUrl crossorigin).avatar
         h3=loggedInUser.name
     form(method="POST", enctype="multipart/form-data")
         label(for="avatar") Avatar
