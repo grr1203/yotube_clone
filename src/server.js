@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(
   session({
     store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1:27017/youtubeClone",
+      mongoUrl: process.env.DB_URL,
     }),
     secret: process.env.COOKIE_SECRET,
     resave: false,
